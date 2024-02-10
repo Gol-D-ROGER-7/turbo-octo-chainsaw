@@ -3,7 +3,7 @@ import React from 'react'
 const Navbar = ({links}) => {
   return (
     <>
-    <div className="navbar text-white flex justify-between items-center px-10 py-8 text-lg border-2 ">
+    <div className="navbar text-white flex justify-between items-center px-10 py-8 text-lg  ">
       <div className='cursor-pointer'>
         LOGO
       </div>
