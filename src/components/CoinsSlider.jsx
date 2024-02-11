@@ -1,21 +1,51 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useRecoilValue } from 'recoil'
 import { CoinAtom } from '../store/atoms/CoinAtom'
 import Marquee from 'react-fast-marquee'
+import axios from 'axios'
 
 const CoinsSlider = () => {
-  const res = useRecoilValue(CoinAtom)
+  // const response = useRecoilValue(CoinAtom)
+
   // console.log( res)
 
-  
+  const [data, setData ] = useState([])
+  const [fetched, setFetched] = useState(false);
+
+  // const getData = async () => {
+  //   let res = await axios.get("https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false&locale=en")
+  //   let val = await res.data
+  //   // console.log(val)
+  //   setData(val)
+
+  // }
+
+  const getData = async () => {
+    try {
+      if (!fetched) {
+        const res = await axios.get("https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false&locale=en");
+        const val = res.data;
+        setData(val);
+        setFetched(true);
+        console.log("re render")
+      }
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  };
+
+  useEffect(() => {
+    
+    getData();
+  }, [fetched]);
   return (
-    <div className='text-white m-5  shadow-3xl'>
+    <div className='text-white m-5 shadow-2xl bg '>
       <Marquee >
         {
-          res.map((e) => {
-            return <>
-            <div  className="wrapper  flex gap-5 m-2">
-              <div key={e.id} className="single-coin-slider flex gap-1 items-center text-sm">
+          data.map((e) => {
+            return <div key={e.id}>
+            <div   className="wrapper  flex gap-5 m-2 ">
+              <div className="single-coin-slider flex gap-1 items-center text-sm">
 
                 <div className="img">
                   <img src={e.image} alt="" height={40} width={35}/>
@@ -28,7 +58,7 @@ const CoinsSlider = () => {
 
               </div>
               </div>
-            </>
+              </div>
 
           })
         }
@@ -54,4 +84,4 @@ function BtnComponent() {
     }}>Count ({count})</button>
   </>
 }
-export default CoinsSlider
+export default React.memo(CoinsSlider);

@@ -7,9 +7,10 @@ export const CoinAtom = atom(({
     default: selector({
         key: "CoinAtomSelector",
         get: async () => {
-            let res = await axios.get("https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=50&page=1&sparkline=false&locale=en")
+            let res = await axios.get("https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false&locale=en")
             let val = await res.data
             // console.log(val)
+            // console.log("re-render")
             return (val)
         }
         // get: () => {
