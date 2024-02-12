@@ -1,10 +1,9 @@
 import React, { Suspense, lazy } from 'react'
 import Navbar from './components/Navbar'
-import Nav from './components/Nav'
 import './App.css'
 import { RecoilRoot } from 'recoil'
-import CoinsSlider from './components/CoinsSlider'
 import Coins from './components/Coins'
+import Footer from './components/Footer'
 const CoinSlider = lazy(() => import('./components/CoinsSlider'));
 
 const App = () => {
@@ -12,12 +11,11 @@ const App = () => {
     <RecoilRoot>
       <div className='main'>
           <Navbar  />
-          {/* <Nav /> */}
-          
-        <Suspense fallback={<div>Loading...</div>}>
+        <Suspense fallback={<div className='text-white'>Loading...</div>}>
           <CoinSlider />
-        </Suspense>
           <Coins />
+        </Suspense>
+        <Footer />
       </div>
     </RecoilRoot>
   )

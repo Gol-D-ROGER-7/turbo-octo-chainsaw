@@ -5,12 +5,12 @@
   box-sizing: border-box;
 }
 .main {
-  background-image: url(asset/final.jpg);
+  background-image: url(asset/main_bg.jpg);
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
-  height: 100vh;
+  height: 100%;
   width: auto;
   font-family: 'Poppins';
   letter-spacing: 1px;
